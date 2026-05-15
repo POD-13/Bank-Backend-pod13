@@ -17,7 +17,7 @@ public class SwaggerConfig {
 	public OpenAPI springShopOpenAPI() {
 		return new OpenAPI()
 				.info(new Info().title("Fintech Banking Application")
-				.description("Fintech Banking Application using SpringBoot 3")
+				.description("Fintech Banking Application using Spring Boot 3")
 				.version("v0.0.1")
 				.license(new License()
 				.name("Apache 2.0")
