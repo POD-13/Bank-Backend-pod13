@@ -10,7 +10,7 @@ COPY pom.xml /app/pom.xml
 # Copy the source code into the container
 COPY src /app/src
 
-# Install Maven (if not already included in the base image)
+# Install Maven to build the application
 RUN apk add --no-cache maven
 
 # Package the application using Maven
