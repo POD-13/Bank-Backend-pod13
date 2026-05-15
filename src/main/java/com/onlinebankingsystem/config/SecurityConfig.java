@@ -36,12 +36,14 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
 		http.csrf(csrf -> csrf.disable())
 		        .cors(cors -> cors.disable())
 		    
 				.authorizeHttpRequests(
 						auth -> auth.requestMatchers("/api/user/login", "/api/user/admin/register").permitAll()
+						
+						// permit actuator health endpoint
+						.requestMatchers("/actuator/health").permitAll()
 						
 						// this APIs are only accessible by ADMIN
 						.requestMatchers("/api/bank/register","/api/bank/fetch/all", "/api/bank/fetch/user",
@@ -77,11 +79,8 @@ public class SecurityConfig {
 						.authenticated())
 		        
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
 		http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
-
 		return http.build();
-
 	}
 
 	@Bean
@@ -101,5 +100,4 @@ public class SecurityConfig {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 	}
-
 }
